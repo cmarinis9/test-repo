@@ -1,0 +1,36 @@
+---
+title: "R markdown_test"
+author: "Ch"
+output:
+  html_document: 
+    toc: yes
+    toc_float: yes
+
+---
+
+# Import the necessary packages
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(quantmod);library(forecast)
+require(PerformanceAnalytics)
+require(rcompanion);library(tseries)
+require(dygraphs)
+```
+
+
+
+```{r}
+date1 = as.Date(c("2014-01-01"))
+date2 = as.Date(c("2023-12-31"))
+```
+
+# Download bitcoin time series
+```{r}
+getSymbols("BTC-USD",from= date1,to= date2)
+bitcoin.ts <- xts(`BTC-USD`$`BTC-USD.Adjusted`)
+```
+
+## Plot of Bitcoin prices time series
+```{r fig.width=6, fig.height=4}
+plot(bitcoin.ts,col = "blue")
+```
